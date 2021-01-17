@@ -64,7 +64,7 @@ Require params:
   password: 'string'
 }`
 
-WARNING! Will delete all links and this logon
+WARNING! Will delete all links and this login
 
 ## Get all links
 
