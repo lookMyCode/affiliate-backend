@@ -4,10 +4,10 @@
 
 All queries get params in the body and returns response like it:
 `{
-  statusCode: 200, // number status
-  statusText: 'OK', // text status
-  message: 'Success', // Additional information
-  data: {...} // Data if need
+  statusCode: 200,
+  statusText: 'OK',
+  message: 'Success',
+  data: {...}
 }`
 
 ## Registration
