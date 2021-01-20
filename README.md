@@ -2,7 +2,7 @@
 
 ## Usage
 
-All queries get params in the body and returns response like it:
+All queries must have params in the body and returns response like it:
 `{
   statusCode: 200,
   statusText: 'OK',
@@ -12,7 +12,7 @@ All queries get params in the body and returns response like it:
 
 ## Registration
 
-`POST: /profile`
+`POST: /profile/register`
 Require params:
 `{
   email: 'string',
@@ -23,7 +23,7 @@ Return token
 
 ## Login
 
-`GET: /profile`
+`POST: /profile/login`
 Require params:
 `{
   email: 'string',
@@ -34,7 +34,7 @@ Return token
 
 ## Change email
 
-`PATCH: /profile/email`
+`POST: /profile/email`
 Require params:
 `{
   email: 'string',
@@ -45,7 +45,7 @@ WARNING! Will return new token
 
 ## Change password
 
-`PATCH: /profile/password`
+`POST: /profile/password`
 Require params:
 `{
   token: 'string',
@@ -57,7 +57,7 @@ WARNING! Will return new token
 
 ## Delete profile
 
-`DELETE: /profile`
+`POST: /profile/delete`
 Require params:
 `{
   token: 'string',
@@ -68,7 +68,7 @@ WARNING! Will delete all links and this login
 
 ## Get all links
 
-`GET: /link`
+`POST: /link/getAll`
 Require params:
 `{
   token: 'string'
@@ -78,7 +78,7 @@ Return all links for this user
 
 ## Get link by id
 
-`GET: /link/getById`
+`POST: /link/getById`
 Require params:
 `{
   token: 'string',
@@ -89,7 +89,7 @@ Return link by id if token is valid
 
 ## Get link by shortname
 
-`GET: /link/getByShortName`
+`POST: /link/getByShortName`
 Require params:
 `{
   shortLink: 'string'
@@ -99,7 +99,7 @@ Return original link by shortname and add click-event
 
 ## Add link
 
-`POST: /link`
+`POST: /link/add`
 Require params:
 `{
   token: 'string',
@@ -109,7 +109,7 @@ Require params:
 
 ## Add click-event
 
-`PATCH: /link`
+`POST: /link/addClick`
 Require params:
 `{
   shortLink: 'string'
@@ -117,7 +117,7 @@ Require params:
 
 ## Delete link
 
-`DELETE: /link`
+`POST: /link/delete`
 Require params:
 `{
   token: 'string',

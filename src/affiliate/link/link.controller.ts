@@ -2,9 +2,9 @@ import { GetLinkByIdDto } from './../../dto/get-link-by-id.dto';
 import { AddLinkDto } from './../../dto/add-link.dto';
 import { IRes } from './../../interfaces';
 import { LinkService } from './link.service';
-import { Body, Controller, Delete, Get, HttpStatus, Patch, Post, Res } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { TokenDto } from 'src/dto/token.dto';
-import { Response, Request } from 'express';
+import { Response } from 'express';
 import { GetLinkByShortNameDto } from 'src/dto/getLinkByShortName.dto';
 
 @Controller('link')
@@ -14,7 +14,7 @@ export class LinkController {
     private linkService: LinkService
   ) {}
 
-  @Get()
+  @Post('getAll')
   async getAll(@Res() res: Response, @Body() tokenDto: TokenDto) {
     if (!tokenDto.token) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -26,7 +26,7 @@ export class LinkController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Get('getById')
+  @Post('getById')
   async getById(@Res() res: Response, @Body() getLinkByIdDto: GetLinkByIdDto) {
     if (!getLinkByIdDto.token || !getLinkByIdDto.id) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -38,7 +38,7 @@ export class LinkController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Get('getByShortName')
+  @Post('getByShortName')
   async getByShortName(@Res() res: Response, @Body() getLinkByShortNameDto: GetLinkByShortNameDto) {
     if (!getLinkByShortNameDto.shortLink) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -50,7 +50,7 @@ export class LinkController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Post()
+  @Post('add')
   async addLink(@Res() res: Response, @Body() addLinkDto: AddLinkDto) {
     if (!addLinkDto.token || !addLinkDto.originalLink || !addLinkDto.name) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -62,7 +62,7 @@ export class LinkController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Patch()
+  @Post('addClick')
   async addClick(@Res() res: Response, @Body() shortLinkDto: GetLinkByShortNameDto) {
     if (!shortLinkDto.shortLink) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -74,7 +74,7 @@ export class LinkController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Delete()
+  @Post('delete')
   async deleteLink(@Res() res: Response, @Body() getLinkByIdDto: GetLinkByIdDto) {
     if (!getLinkByIdDto.token || !getLinkByIdDto.id) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,

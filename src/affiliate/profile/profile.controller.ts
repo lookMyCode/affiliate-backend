@@ -4,8 +4,8 @@ import { IRes } from './../../interfaces';
 import { ChangeLoginDto } from './../../dto/change-login.dto';
 import { CreateProfileDto } from './../../dto/create-profile.dto';
 import { ProfileService } from './profile.service';
-import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Param, Patch, Post, Res } from '@nestjs/common';
-import { Response, Request } from 'express';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import { Response } from 'express';
 
 @Controller('profile')
 export class ProfileController {
@@ -14,7 +14,7 @@ export class ProfileController {
     private profileService: ProfileService
   ) {}
 
-  @Get()
+  @Post('login')
   async login(@Res() res: Response, @Body() createProfileDto: CreateProfileDto) {
     if (!createProfileDto.email || !createProfileDto.password) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -26,7 +26,7 @@ export class ProfileController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Post()
+  @Post('register')
   async register(@Res() res: Response, @Body() createProfileDto: CreateProfileDto) {
     if (!createProfileDto.email || !createProfileDto.password) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -38,7 +38,7 @@ export class ProfileController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Patch('email')
+  @Post('email')
   async changeEmail(@Res() res: Response, @Body() changeLoginDto: ChangeLoginDto) {
     if (!changeLoginDto.email || !changeLoginDto.token) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -50,7 +50,7 @@ export class ProfileController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Patch('password')
+  @Post('password')
   async changePass(@Res() res: Response, @Body() changePassDto: ChangePassDto) {
     if (!changePassDto.token || !changePassDto.oldPassword || !changePassDto.newPassword) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
@@ -62,7 +62,7 @@ export class ProfileController {
     return res.status(response.statusCode).json(response);
   }
 
-  @Delete()
+  @Post('delete')
   async deleteProfile(@Res() res: Response, @Body() deleteProfileDto: DeleteProfileDto) {
     if (!deleteProfileDto.token || !deleteProfileDto.password) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,

@@ -27,9 +27,9 @@ export class ProfileService {
 
       if (!profile) {
         return {
-          statusCode: HttpStatus.NOT_FOUND,
-          statusText: 'NOT_FOUND',
-          message: 'Profile not found'
+          statusCode: HttpStatus.UNAUTHORIZED,
+          statusText: 'UNAUTHORIZED',
+          message: 'Wrong email or password'
         }
       }
 
@@ -48,7 +48,7 @@ export class ProfileService {
         return {
           statusCode: HttpStatus.UNAUTHORIZED,
           statusText: 'UNAUTHORIZED',
-          message: 'Wrong password'
+          message: 'Wrong email or password'
         }
       }
     } catch (err) {
