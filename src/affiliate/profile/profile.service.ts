@@ -130,6 +130,16 @@ export class ProfileService {
         }
       }
 
+      const isRightPass = await this.checkPass(changeLoginDto.password, profile.password);
+
+      if(!isRightPass) {
+        return {
+          statusCode: HttpStatus.UNAUTHORIZED,
+          statusText: 'UNAUTHORIZED',
+          message: 'Wrong old password'
+        }
+      }
+
       const isBusy: boolean = await this.isBusyEmail(changeLoginDto.email);
 
       if (isBusy) {
@@ -188,7 +198,7 @@ export class ProfileService {
         }
       }
 
-      const isRightPass = await this.checkPass(changePassDto.oldPassword, profile.password)
+      const isRightPass = await this.checkPass(changePassDto.oldPassword, profile.password);
 
       if(!isRightPass) {
         return {

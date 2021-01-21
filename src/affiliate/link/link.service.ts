@@ -77,7 +77,7 @@ export class LinkService {
           statusText: 'CREATED',
           message: 'Link has been created',
           data: {
-            shortLink: newLink.shortLink
+            link: savedLink
           }
         }
       } else {

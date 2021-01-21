@@ -40,7 +40,7 @@ export class ProfileController {
 
   @Post('email')
   async changeEmail(@Res() res: Response, @Body() changeLoginDto: ChangeLoginDto) {
-    if (!changeLoginDto.email || !changeLoginDto.token) return res.status(HttpStatus.PRECONDITION_FAILED).json({
+    if (!changeLoginDto.email || !changeLoginDto.token || !changeLoginDto.password) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
       statusText: 'PRECONDITION_FAILED',
       message: 'Token and new email are required'
