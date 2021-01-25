@@ -28,6 +28,7 @@ export class ProfileController {
 
   @Post('register')
   async register(@Res() res: Response, @Body() createProfileDto: CreateProfileDto) {
+    console.log(createProfileDto)
     if (!createProfileDto.email || !createProfileDto.password) return res.status(HttpStatus.PRECONDITION_FAILED).json({
       statusCode: HttpStatus.PRECONDITION_FAILED,
       statusText: 'PRECONDITION_FAILED',
